@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- we give src to video ya koi file ka path  -->
+    <video controls loop autoplay ></video>
+   <script>
+       let videoPlayer=document.querySelector("video");
+
+    //    Ye ek browser ke function hai jiski help se ham user se access krva
+    // sakte hai uske media ko like camera and mike vgera 
+       let promiseToUseCamera=navigator.mediaDevices.getUserMedia(
+       {
+        //    by defaul all are false  
+           video:true,
+           audio:true,
+       });
+
+
+       promiseToUseCamera.then((mediaStream)=>{
+
+        // simple terms me mediaStream ek object hai jisme continuosly camera and mike
+        // chlta rhega jisko hm badme video player ke source me lgadete hai taki vo camera chlta rhe
+           videoPlayer.srcObject=mediaStream;
+       })
+       .catch(()=>{
+           console.log("User denied the access");
+       })
+   </script>
+</body>
+</html>
