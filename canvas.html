@@ -24,15 +24,30 @@
         let canvas=document.querySelector("canvas");
         canvas.width=window.innerWidth;
         canvas.height=window.innerHeight;
-
+        let isDrawing=false;
         let tool=canvas.getContext("2d");
+        let x=0,y=0;
+        window.addEventListener("mousedown",(e)=>{
+            isDrawing=true;
+            x=e.clientX;
+            y=e.clientY;
+            tool.moveTo(e.clientX,e.clientY);
+        });
 
-        tool.moveTo(100,100);
-        tool.lineTo(100,200);
-        tool.lineTo(200,200);
-        tool.lineTo(200,100);
-        tool.lineTo(100,100);
-        tool.stroke();
+        window.addEventListener("mouseup",(e)=>{
+            isDrawing=false;
+            console.log(e);
+        })
+
+        window.addEventListener("mousemove",(e)=>{
+            if(isDrawing)
+            {
+                tool.lineTo(e.clientX,e.clientY)
+                tool.stroke();
+            }
+            else tool.beginPath;
+        })
+
     </script>
 </body>
 </html>
