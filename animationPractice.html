@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        .container div{
+            height: 10rem;
+            width: 10rem;
+            border: 1px solid;
+            position: absolute;
+        }
+        .red{
+            background-color: red;
+            animation: moveRight;
+            animation-duration: 2s;
+            animation-fill-mode: forwards;
+        }
+        .green{
+            background-color: green;
+            animation: moveDown;
+            animation-duration: 2s;
+            animation-fill-mode: forwards;
+            animation-delay: 2s;
+        }
+        .yellow{
+            background-color: yellow;
+            animation: moveUp;
+            animation-duration: 2s;
+            animation-fill-mode: forwards;
+            animation-delay: 6s;
+        }
+        .blue{
+            background-color: blue;
+            animation: moveLeft;
+            animation-duration: 2s;
+            animation-fill-mode: forwards;
+            animation-delay: 4s;
+        }
+
+        .top-left{
+            top: 0;
+            left: 0;
+        }
+
+        .top-right{
+            top: 0;
+            right: 0;;
+        }
+        .bottom-left{
+            bottom: 0;
+            left: 0;
+        }
+
+        .bottom-right{
+            bottom: 0;
+            right: 0;
+        }
+
+        @keyframes moveRight{
+
+            0%{
+                top: 0vh;
+                left: 0vw;
+            }
+
+            100%{
+                top: 0vh;
+                left: calc(100vw - 10rem);
+            }
+        }
+        @keyframes moveLeft{
+
+            0%{
+                bottom: 0vh;
+                right: 0vw;
+            }
+
+            100%{
+                bottom: 0vh;
+                right: calc(100vw - 10rem);
+            }
+        }
+        @keyframes moveDown{
+            0%{
+                top: 0vh;
+                right: 0vw;
+            }
+
+            100%{
+                top:calc(100vh - 10rem);
+                right: 0w;
+            }
+        }
+        @keyframes moveUp{
+            0%{
+                left: 0vh;
+                bottom: 0vw;
+            }
+
+            100%{
+                left: 0vh;
+                bottom: calc(100vh - 10rem);
+            }
+        }
+  
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="red top-left"></div>
+        <div class="green top-right"></div>
+        <div class="yellow bottom-left"></div>
+        <div class="blue bottom-right"></div>
+    </div>
+</body>
+</html>
