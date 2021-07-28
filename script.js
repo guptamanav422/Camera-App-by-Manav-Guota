@@ -8,8 +8,14 @@ let isRecording = false;
 
 
 captureBtn.addEventListener("click",()=>{
-    let canvas=document.createElement("canvas");
+   let innerSpan=captureBtn.querySelector("span");
+   innerSpan.classList.add("capture-animation")
 
+    setTimeout(()=>{
+      innerSpan.classList.remove("capture-animation");
+    },1000);
+
+    let canvas=document.createElement("canvas");
     canvas.width=videoPlayer.videoWidth;
     canvas.height=videoPlayer.videoHeight;
 
@@ -28,14 +34,17 @@ captureBtn.addEventListener("click",()=>{
 });
 
 recordBtn.addEventListener("click", () => {
+  let innerSpan=recordBtn.querySelector("span");
   if (isRecording) {
     //    recording ko stop krna hai
     mediaRecorder.stop();
     isRecording = false;
+    innerSpan.classList.remove("record-animation");
   } else {
     //    recording ko on krna hai
     mediaRecorder.start();
     isRecording = true;
+    innerSpan.classList.add("record-animation");
   }
 });
 // Ye ek browser ke function hai jiski help se ham user se access krva
