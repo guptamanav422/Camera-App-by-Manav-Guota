@@ -1,3 +1,4 @@
+
 let videoPlayer = document.querySelector("video");
 let captureBtn=document.querySelector("#capture");
 let recordBtn = document.querySelector("#record");
@@ -5,8 +6,25 @@ let body=document.querySelector("body");
 let mediaRecorder;
 let chunks = [];
 let isRecording = false;
+let filter=""
 
+let allFilters=document.querySelectorAll(".filter");
 
+for(let i=0;i<allFilters.length;i++)
+{
+    allFilters[i].addEventListener("click",(e)=>{
+
+    let previousFilter=document.querySelector(".filter-div");
+    if(previousFilter) previousFilter.remove();
+
+    let color=e.currentTarget.style.backgroundColor;
+    let div=document.createElement("div");
+    div.classList.add("filter-div");
+    div.style.backgroundColor=color;
+    body.append(div);
+    filter=color;
+  })
+}
 captureBtn.addEventListener("click",()=>{
    let innerSpan=captureBtn.querySelector("span");
    innerSpan.classList.add("capture-animation")
@@ -23,6 +41,12 @@ captureBtn.addEventListener("click",()=>{
 
     tool.drawImage(videoPlayer,0,0);
     
+    if(filter!=""){
+      tool.fillStyle=filter;
+      // by default rectangle ka color black hota hai to hmne isse fillstyle 
+      // diya color 
+      tool.fillRect(0,0,canvas.width,canvas.height);
+    }
     let url=canvas.toDataURL(canvas);
     let a = document.createElement("a");
     a.href = url;
@@ -35,6 +59,11 @@ captureBtn.addEventListener("click",()=>{
 
 recordBtn.addEventListener("click", () => {
   let innerSpan=recordBtn.querySelector("span");
+
+  let previousFilter=document.querySelector(".filter-div");
+  if(previousFilter) previousFilter.remove();
+  filter="";
+
   if (isRecording) {
     //    recording ko stop krna hai
     mediaRecorder.stop();
