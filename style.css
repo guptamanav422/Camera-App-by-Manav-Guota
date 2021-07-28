@@ -1,3 +1,55 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
 .video-container{
     overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+}
+video{
+    height: 100%;
+    width: 100%;
+}
+
+button{
+    position: fixed;
+}
+
+#record{
+    top: 40vh;
+    right: 2rem;
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    border: none;
+}
+
+#capture{
+    top: 60vh;
+    right: 2rem;
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    border: none;
+}
+.filters{
+    height: 12rem;
+    width: 5rem;
+    border: 1px solid blueviolet;
+    position: fixed;
+    top: 20vh;
+    left: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter{
+    border: 1px solid white;
+    flex-grow: 1;
+    background-size: cover; 
+    /* contains also work here */
+    background-image: url(http://hdwallpapersite.net/wp-content/uploads/2019/08/Nature-HD-Wallpaper-Pics-512.jpg);
+    background-blend-mode: color-burn;
 }
