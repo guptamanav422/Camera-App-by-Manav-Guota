@@ -1,8 +1,31 @@
 let videoPlayer = document.querySelector("video");
+let captureBtn=document.querySelector("#capture");
 let recordBtn = document.querySelector("#record");
+let body=document.querySelector("body");
 let mediaRecorder;
 let chunks = [];
 let isRecording = false;
+
+
+captureBtn.addEventListener("click",()=>{
+    let canvas=document.createElement("canvas");
+
+    canvas.width=videoPlayer.videoWidth;
+    canvas.height=videoPlayer.videoHeight;
+
+    let tool=canvas.getContext("2d");
+
+    tool.drawImage(videoPlayer,0,0);
+    
+    let url=canvas.toDataURL(canvas);
+    let a = document.createElement("a");
+    a.href = url;
+    a.download = "image.png";
+    a.click();
+    a.remove();
+    // body.append(canvas);
+
+});
 
 recordBtn.addEventListener("click", () => {
   if (isRecording) {
@@ -42,6 +65,7 @@ promiseToUseCamera
       a.href = url;
       a.download = "video.mp4";
       a.click();
+      a.remove();
     });
   })
   .catch(() => {
