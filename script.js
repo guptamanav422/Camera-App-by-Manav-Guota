@@ -4,6 +4,7 @@ let recordBtn = document.querySelector("#record");
 let body=document.querySelector("body");
 let zoomIn=document.querySelector(".in");
 let zoomOut=document.querySelector(".out");
+let galleryBtn=document.querySelector("#gallery");
 let mediaRecorder;
 let chunks = [];
 let isRecording = false;
@@ -11,6 +12,10 @@ let filter="";
 let currZoom=1; // min=1 and max=3 
 let allFilters=document.querySelectorAll(".filter");
 
+
+galleryBtn.addEventListener("click",(e)=>{
+  location.assign("./gallery.html")
+})
 
 zoomIn.addEventListener("click",(e)=>{
   currZoom=currZoom+0.1;
@@ -71,11 +76,14 @@ captureBtn.addEventListener("click",()=>{
       tool.fillRect(0,0,canvas.width,canvas.height);
     }
     let url=canvas.toDataURL(canvas);
-    let a = document.createElement("a");
-    a.href = url;
-    a.download = "image.png";
-    a.click();
-    a.remove();
+    canvas.remove();
+    saveMedia(url);
+
+    // let a = document.createElement("a");
+    // a.href = url;
+    // a.download = "image.png";
+    // a.click();
+    // a.remove();
     // body.append(canvas);
 
 });
@@ -123,12 +131,13 @@ promiseToUseCamera
       let blob = new Blob(chunks, { type: "video/mp4" });
       chunks = [];
 
-      let url = URL.createObjectURL(blob);
-      let a = document.createElement("a");
-      a.href = url;
-      a.download = "video.mp4";
-      a.click();
-      a.remove();
+      saveMedia(blob);
+      // let url = URL.createObjectURL(blob);
+      // let a = document.createElement("a");
+      // a.href = url;
+      // a.download = "video.mp4";
+      // a.click();
+      // a.remove();
     });
   })
   .catch(() => {
