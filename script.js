@@ -1,15 +1,29 @@
-
 let videoPlayer = document.querySelector("video");
 let captureBtn=document.querySelector("#capture");
 let recordBtn = document.querySelector("#record");
 let body=document.querySelector("body");
+let zoomIn=document.querySelector(".in");
+let zoomOut=document.querySelector(".out");
 let mediaRecorder;
 let chunks = [];
 let isRecording = false;
-let filter=""
-
+let filter="";
+let currZoom=1; // min=1 and max=3 
 let allFilters=document.querySelectorAll(".filter");
 
+
+zoomIn.addEventListener("click",(e)=>{
+  currZoom=currZoom+0.1;
+  if(currZoom>3) currZoom=3;
+
+  videoPlayer.style.transform=`scale(${currZoom})`;
+})
+
+zoomOut.addEventListener("click",(e)=>{
+  currZoom-=0.1;
+  if(currZoom<1) currZoom=1;
+  videoPlayer.style.transform=`scale(${currZoom})`;
+})
 for(let i=0;i<allFilters.length;i++)
 {
     allFilters[i].addEventListener("click",(e)=>{
@@ -38,6 +52,15 @@ captureBtn.addEventListener("click",()=>{
     canvas.height=videoPlayer.videoHeight;
 
     let tool=canvas.getContext("2d");
+
+    // top left to center 
+    tool.translate(canvas.width/2,canvas.height/2);
+
+    // then zoom the conavas (basically stretch) 
+    tool.scale(currZoom,currZoom);
+
+    // then again shift to the top left corner 
+    tool.translate(-canvas.width/2,-canvas.height/2)
 
     tool.drawImage(videoPlayer,0,0);
     
@@ -72,6 +95,8 @@ recordBtn.addEventListener("click", () => {
   } else {
     //    recording ko on krna hai
     mediaRecorder.start();
+    currZoom=1;
+    videoPlayer.style.transform=`scale(${currZoom})`;
     isRecording = true;
     innerSpan.classList.add("record-animation");
   }
