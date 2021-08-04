@@ -124,7 +124,7 @@ function deleteMedia(mId)
     let tx=database.transaction("media","readwrite");
     let mediaStore=tx.objectStore("media")
     mediaStore.delete(mId);
-    console.log(mediaStore);
+    // console.log(mediaStore);
     
-    console.log(mId)
+    // console.log(mId)
 }
